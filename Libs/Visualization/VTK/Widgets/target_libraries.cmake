@@ -10,7 +10,7 @@ set(target_libraries
   CTKVisualizationVTKCore
   )
 
-if(CTK_QT_VERSION VERSION_EQUAL "6")
+if(CTK_QT_VERSION EQUAL "6")
     list(APPEND target_libraries Qt6Network_LIBRARIES)
 else()
   message(FATAL_ERROR "Support for this Qt is not implemented")
