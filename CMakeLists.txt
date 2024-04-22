@@ -110,9 +110,9 @@ mark_as_advanced(CTK_SUPERBUILD)
 #-----------------------------------------------------------------------------
 # Qt version
 #
-set(CTK_QT_VERSION "5" CACHE STRING "Expected Qt version")
+set(CTK_QT_VERSION "6" CACHE STRING "Expected Qt version")
 mark_as_advanced(CTK_QT_VERSION)
-set_property(CACHE CTK_QT_VERSION PROPERTY STRINGS 5)
+set_property(CACHE CTK_QT_VERSION PROPERTY STRINGS 6)
 mark_as_superbuild(CTK_QT_VERSION)
 
 #-----------------------------------------------------------------------------
