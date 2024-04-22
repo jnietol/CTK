@@ -28,6 +28,7 @@
 #include <QMutex>
 #include <QRunnable>
 #include <QSharedPointer>
+#include <QObject>
 
 // CTK includes
 #include "ctkCoreExport.h"

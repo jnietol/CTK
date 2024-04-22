@@ -1,10 +1,10 @@
 
-# QT5_GENERATE_MOCS(inputfile1 [inputfile2 ...])
+# qt_generate_moc(inputfile1 [inputfile2 ...])
 
 include(MacroAddFileDependencies)
 
 function(_ctk_generate_mocs)
-  if(CTK_QT_VERSION VERSION_EQUAL "5")
+  if(CTK_QT_VERSION VERSION_EQUAL "6")
     if(Qt5_VERSION VERSION_LESS "5.15.0")
       QT5_GET_MOC_FLAGS(_moc_flags)
     else()
@@ -30,7 +30,7 @@ function(_ctk_generate_mocs)
 
     set(moc_file ${CMAKE_CURRENT_BINARY_DIR}/moc_${source_name}${source_ext})
 
-    if(CTK_QT_VERSION VERSION_EQUAL "5")
+    if(CTK_QT_VERSION VERSION_EQUAL "6")
       if(Qt5_VERSION VERSION_LESS "5.6")
         QT5_CREATE_MOC_COMMAND(${abs_file} ${moc_file} "${_moc_flags}" "" "")
       elseif(Qt5_VERSION VERSION_LESS "5.15.0")
@@ -38,7 +38,7 @@ function(_ctk_generate_mocs)
       else()
         # qt5_generate_moc internally calls qt5_get_moc_flags and ensure
         # no warnings are reported.
-        qt5_generate_moc(${abs_file} ${moc_file})
+        qt_generate_moc(${abs_file} ${moc_file})
       endif()
     else()
       message(FATAL_ERROR "Support for Qt${CTK_QT_VERSION} is not implemented")
@@ -48,6 +48,6 @@ function(_ctk_generate_mocs)
 endfunction()
 
 # create a Qt5 alias
-macro(QT5_GENERATE_MOCS)
+macro(qt_generate_moc)
   _ctk_generate_mocs(${ARGN})
 endmacro()

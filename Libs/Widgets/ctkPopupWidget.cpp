@@ -20,7 +20,7 @@
 
 // Qt includes
 #include <QApplication>
-#include <QDesktopWidget>
+#include <QScreen>
 #include <QDialog>
 #include <QDir>
 #include <QEvent>
@@ -420,7 +420,7 @@ void ctkPopupWidget::enterEvent(QEvent* event)
 {
   Q_D(ctkPopupWidget);
   QTimer::singleShot(d->ShowDelay, this, SLOT(updatePopup()));
-  this->Superclass::enterEvent(event);
+  this->Superclass::enterEvent(static_cast<QEnterEvent*>(event));
 }
 
 // --------------------------------------------------------------------------

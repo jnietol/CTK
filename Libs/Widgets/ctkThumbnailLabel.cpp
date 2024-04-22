@@ -363,7 +363,7 @@ QSize ctkThumbnailLabel::sizeHint()const
   Q_D(const ctkThumbnailLabel);
   return d->OriginalThumbnail.isNull() ?
     this->Superclass::sizeHint() :
-    d->OriginalThumbnail.size().expandedTo(QApplication::globalStrut());
+    d->OriginalThumbnail.size();
 }
 
 //----------------------------------------------------------------------------

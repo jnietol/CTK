@@ -32,6 +32,9 @@
 #include <QModelIndex>
 #include <QStringList>
 
+#include <QRegExp>
+
+
 // STD includes
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
 #include <list>
@@ -147,6 +150,13 @@ CTK_CORE_EXPORT QString extensionToRegExp(const QString& extension);
 /// into a regular expression string
 /// "*.jpg", "*.txt" -> "(.*\\.jpg?$|.*\\.txt?$)"
 CTK_CORE_EXPORT QRegExp nameFiltersToRegExp(const QStringList& nameFilters);
+
+///
+/// \ingroup Core
+/// Convert a list of wildcar extension filters ("*.jpg")
+/// into a regular expression string
+/// "*.jpg", "*.txt" -> "(.*\\.jpg?$|.*\\.txt?$)"
+CTK_CORE_EXPORT QRegularExpression nameFiltersToRegularExpression(const QStringList& nameFilters);
 
 ///
 /// \ingroup Core

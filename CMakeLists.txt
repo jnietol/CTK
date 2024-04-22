@@ -53,6 +53,11 @@ endif()
 project(CTK)
 #-----------------------------------------------------------------------------
 
+set(CRAFTROOT_DIR $ENV{HOME}/CraftRoot CACHE PATH "CraftRoot directory")
+set(CRAFTROOT_LIB ${CRAFTROOT_DIR}/lib)
+
+link_directories(${CRAFTROOT_LIB})
+
 #-----------------------------------------------------------------------------
 # Set defaults
 #

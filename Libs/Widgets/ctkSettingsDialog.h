@@ -23,9 +23,11 @@
 
 // Qt includes
 #include <QDialog>
+#include <QSettings>
 
 // CTK includes
 #include "ctkWidgetsExport.h"
+#include "ctkSettingsPanel.h"
 
 class QAbstractButton;
 class QSettings;

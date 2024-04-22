@@ -36,6 +36,7 @@
 #include "ctkDICOMServer.h"
 #include "ctkDICOMStorageListenerJob.h"
 #include "ctkDICOMUtil.h"
+#include "ctkDICOMJob.h"
 
 // dcmtk includes
 #include <dcmtk/dcmdata/dcdeftag.h>

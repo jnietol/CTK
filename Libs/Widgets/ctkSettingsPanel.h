@@ -24,6 +24,7 @@
 // Qt includes
 #include <QMetaType>
 #include <QWidget>
+#include <QSettings>
 
 // CTK includes
 #include "ctkWidgetsExport.h"

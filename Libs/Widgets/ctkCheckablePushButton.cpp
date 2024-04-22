@@ -21,7 +21,7 @@
 // Qt includes
 #include <QApplication>
 #include <QDebug>
-#include <QDesktopWidget>
+#include <QScreen>
 #include <QLayout>
 #include <QMouseEvent>
 #include <QMenu>
@@ -88,7 +88,7 @@ QStyleOptionButton ctkCheckablePushButtonPrivate::drawIcon(QPainter* p)
 
   QStyleOptionButton indicatorOpt;
 
-  indicatorOpt.init(q);
+  indicatorOpt.initFrom(q);
   if (!this->CheckBoxUserCheckable)
   {
     indicatorOpt.state &= ~QStyle::State_Enabled;

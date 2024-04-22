@@ -22,6 +22,7 @@
 #include <QDebug>
 #include <QDir>
 #include <QRegExp>
+#include <QRegularExpression>
 #include <QString>
 #include <QStringList>
 
@@ -183,6 +184,40 @@ QRegExp ctk::nameFiltersToRegExp(const QStringList& nameFilters)
     pattern += ")";
   }
   return QRegExp(pattern);
+}
+
+//-----------------------------------------------------------------------------
+QRegularExpression ctk::nameFiltersToRegularExpression(const QStringList& nameFilters)
+{
+    QString pattern;
+    foreach(const QString& nameFilter, nameFilters)
+    {
+        foreach(const QString& extension, nameFilterToExtensions(nameFilter))
+        {
+            QString regExpExtension = extensionToRegExp(extension);
+            if (!regExpExtension.isEmpty())
+            {
+                if (pattern.isEmpty())
+                {
+                    pattern = "(";
+                }
+                else
+                {
+                    pattern += "|";
+                }
+                pattern +=regExpExtension;
+            }
+        }
+    }
+    if (pattern.isEmpty())
+    {
+        pattern = ".+";
+    }
+    else
+    {
+        pattern += ")";
+    }
+    return QRegularExpression(pattern);
 }
 
 //-----------------------------------------------------------------------------

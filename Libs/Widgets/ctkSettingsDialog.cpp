@@ -24,6 +24,7 @@
 #include <QMessageBox>
 #include <QPushButton>
 #include <QSettings>
+#include <QRegExp>
 
 // CTK includes
 #include "ctkSettingsPanel.h"
@@ -140,7 +141,7 @@ void ctkSettingsDialogPrivate::updatePanelTitle(ctkSettingsPanel* panel)
 {
   QTreeWidgetItem* panelItem = this->item(panel);
   QString title = panelItem->text(0);
-  title.replace(QRegExp("\\*$"),"");
+  title.replace(QRegularExpression("\\*$"),"");
   if (!panel->changedSettings().isEmpty())
   {
     title.append('*');
@@ -151,7 +152,7 @@ void ctkSettingsDialogPrivate::updatePanelTitle(ctkSettingsPanel* panel)
 // --------------------------------------------------------------------------
 void ctkSettingsDialogPrivate::updateRestartRequiredLabel()
 {
-  Q_Q(ctkSettingsDialog);
+  //Q_Q(ctkSettingsDialog);
   QStringList restartRequiredSettings;
   foreach(const ctkSettingsPanel* panel, this->panels())
   {

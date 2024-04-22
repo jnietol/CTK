@@ -30,10 +30,11 @@
 
 // ctkDICOMCore includes
 #include <ctkDICOMDatabase.h>
+#include <ctkDICOMTableManager.h>
 
 // ctkDICOMWidgets includes
 #include "ctkDICOMWidgetsExport.h"
-class ctkDICOMTableManager;
+//class ctkDICOMTableManager;
 class ctkDICOMQueryRetrieveWidgetPrivate;
 
 /// \ingroup DICOM_Widgets

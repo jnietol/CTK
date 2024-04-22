@@ -29,18 +29,21 @@
 #include <QMap>
 
 // ctkCore includes
+#include "ctkDICOMJob.h"
 #include <ctkJobScheduler.h>
-class ctkAbstractJob;
+//class ctkAbstractJob;
 
 // ctkDICOMCore includes
 #include "ctkDICOMCoreExport.h"
 #include "ctkDICOMDatabase.h"
-class ctkDICOMJob;
+
+
+//class ctkDICOMJob;
 class ctkDICOMIndexer;
 class ctkDICOMSchedulerPrivate;
 class ctkDICOMServer;
 class ctkDICOMStorageListenerJob;
-struct ctkDICOMJobDetail;
+//struct ctkDICOMJobDetail;
 
 /// \ingroup DICOM_Core
 class CTK_DICOM_CORE_EXPORT ctkDICOMScheduler : public ctkJobScheduler

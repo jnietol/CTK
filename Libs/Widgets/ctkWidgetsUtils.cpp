@@ -21,7 +21,7 @@
 // Qt includes
 #include <QBuffer>
 #include <QImage>
-#include <QGLWidget>
+#include <QOpenGLWidget>
 #include <QPainter>
 #include <QWidget>
 
@@ -55,7 +55,7 @@ QImage ctk::grabWidget(QWidget* widget, QRect rectangle)
   QImage widgetImage = widgetPixmap.toImage();
   QPainter painter;
   painter.begin(&widgetImage);
-  foreach(QGLWidget* glWidget, widget->findChildren<QGLWidget*>())
+  foreach(QOpenGLWidget* glWidget, widget->findChildren<QOpenGLWidget*>())
   {
     if (!glWidget->isVisible())
     {
@@ -66,7 +66,7 @@ QImage ctk::grabWidget(QWidget* widget, QRect rectangle)
     {
       continue;
     }
-    QImage subImage = glWidget->grabFrameBuffer();
+    QImage subImage = glWidget->grabFramebuffer();
     painter.drawImage(subWidgetRect, subImage);
   }
   painter.end();

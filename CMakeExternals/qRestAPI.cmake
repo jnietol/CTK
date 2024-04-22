@@ -41,7 +41,7 @@ if(NOT DEFINED ${proj}_DIR)
   endif()
 
   set(ep_cache_args)
-  if(CTK_QT_VERSION VERSION_EQUAL "5")
+  if(CTK_QT_VERSION VERSION_EQUAL "6")
     list(APPEND ep_cache_args
       -DQt5_DIR:PATH=${Qt5_DIR}
       )

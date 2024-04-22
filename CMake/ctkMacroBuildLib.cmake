@@ -112,20 +112,23 @@ ${${MY_EXPORT_CUSTOM_CONTENT_FROM_VARIABLE}}
   if(MY_MOC_SRCS)
     # this is a workaround for Visual Studio. The relative include paths in the generated
     # moc files can get very long and can't be resolved by the MSVC compiler.
-    if(CTK_QT_VERSION VERSION_EQUAL "5")
+    if(CTK_QT_VERSION VERSION_EQUAL "6")
       foreach(moc_src ${MY_MOC_SRCS})
-        qt5_wrap_cpp(MY_MOC_CPP ${moc_src} OPTIONS -f${moc_src} OPTIONS -DHAVE_QT5)
+        qt_wrap_cpp(MY_MOC_CPP ${moc_src} OPTIONS -f${moc_src} OPTIONS -DHAVE_QT6)
       endforeach()
     else()
       message(FATAL_ERROR "Support for Qt${CTK_QT_VERSION} is not implemented")
     endif()
   endif()
   if(MY_GENERATE_MOC_SRCS)
-    QT5_GENERATE_MOCS(${MY_GENERATE_MOC_SRCS})
+      foreach(moc_src2 ${MY_GENERATE_MOC_SRCS})
+          string(REGEX REPLACE "\\.[^.]*$" "" MYFILE_WITHOUT_EXT ${moc_src2})
+          qt_generate_moc(${moc_src2} moc_${MYFILE_WITHOUT_EXT}.cpp ${lib_name})
+      endforeach()
   endif()
-  if(CTK_QT_VERSION VERSION_EQUAL "5")
-    if(Qt5Widgets_FOUND)
-      qt5_wrap_ui(MY_UI_CPP ${MY_UI_FORMS})
+  if(CTK_QT_VERSION VERSION_EQUAL "6")
+    if(Qt6Widgets_FOUND)
+      qt_wrap_ui(MY_UI_CPP ${MY_UI_FORMS})
     elseif(MY_UI_FORMS)
       message(WARNING "Argument UI_FORMS ignored because Qt5Widgets module was not specified")
     endif()
@@ -134,8 +137,8 @@ ${${MY_EXPORT_CUSTOM_CONTENT_FROM_VARIABLE}}
   endif()
 
   if(DEFINED MY_RESOURCES AND NOT MY_RESOURCES STREQUAL "")
-    if(CTK_QT_VERSION VERSION_EQUAL "5")
-      qt5_add_resources(MY_QRC_SRCS ${MY_RESOURCES})
+    if(CTK_QT_VERSION VERSION_EQUAL "6")
+      qt_add_resources(MY_QRC_SRCS ${MY_RESOURCES})
     else()
       message(FATAL_ERROR "Support for Qt${CTK_QT_VERSION} is not implemented")
     endif()
@@ -191,6 +194,7 @@ ${${MY_EXPORT_CUSTOM_CONTENT_FROM_VARIABLE}}
   if(MINGW)
     list(APPEND my_libs ssp) # add stack smash protection lib
   endif()
+
   target_link_libraries(${lib_name} ${my_libs})
 
   # Update CTK_BASE_LIBRARIES

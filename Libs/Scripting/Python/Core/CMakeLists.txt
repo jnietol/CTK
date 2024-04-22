@@ -44,6 +44,8 @@ configure_file(
 ctkFunctionExtractOptimizedLibrary(PYTHON_LIBRARIES PYTHON_LIBRARY)
 ctkFunctionGetTargetLibraries(KIT_target_libraries)
 
+list(APPEND KIT_target_libraries Qt${CTK_QT_VERSION}::Svg Qt${CTK_QT_VERSION}::Widgets Qt${CTK_QT_VERSION}::Xml Qt${CTK_QT_VERSION}::OpenGL Qt${CTK_QT_VERSION}::OpenGLWidgets Qt6::Core5Compat)
+
 ctkMacroBuildLib(
   NAME ${PROJECT_NAME}
   EXPORT_DIRECTIVE ${KIT_export_directive}

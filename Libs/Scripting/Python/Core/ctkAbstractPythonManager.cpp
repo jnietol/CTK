@@ -29,7 +29,8 @@
 // PythonQT includes
 #include <PythonQt.h>
 
-#include <PythonQt_QtBindings.h>
+#include <PythonQt_QtAll.h>
+#include <PythonQtScriptingConsole.h>
 
 // STD includes
 #include <csignal>
@@ -153,7 +154,7 @@ void ctkAbstractPythonManager::initPythonQt(int flags)
   this->connect(PythonQt::self(), SIGNAL(pythonStdErr(QString)),
                 SLOT(printStderr(QString)));
 
-  PythonQt_init_QtBindings();
+  PythonQt_QtAll::init();
 
   QStringList initCode;
 
@@ -285,7 +286,8 @@ bool ctkAbstractPythonManager::redirectStdOutCallbackEnabled()const
     qWarning() << Q_FUNC_INFO << " failed: PythonQt is not initialized";
     return false;
   }
-  return PythonQt::self()->redirectStdOutCallbackEnabled();
+  //return PythonQt::self()->redirectStdOutCallbackEnabled();
+  return true;
 }
 
 //-----------------------------------------------------------------------------
@@ -296,7 +298,7 @@ void ctkAbstractPythonManager::setRedirectStdOutCallbackEnabled(bool value)
     qWarning() << Q_FUNC_INFO << " failed: PythonQt is not initialized";
     return;
   }
-  PythonQt::self()->setRedirectStdOutCallbackEnabled(value);
+  //PythonQt::self()->setRedirectStdOutCallbackEnabled(value);
 }
 
 //-----------------------------------------------------------------------------

@@ -34,8 +34,8 @@ include_directories(
 find_package(Qt${CTK_QT_VERSION} COMPONENTS Test REQUIRED)
 set(CTK_QT_TEST_LIBRARY Qt${CTK_QT_VERSION}::Test)
 
-if(CTK_QT_VERSION VERSION_EQUAL "5")
-  qt5_generate_mocs(${Tests_MOC_CPPS})
+if(CTK_QT_VERSION VERSION_EQUAL "6")
+  qt_generate_moc(${Tests_MOC_CPPS})
 else()
   message(FATAL_ERROR "Support for Qt${CTK_QT_VERSION} is not implemented")
 endif()

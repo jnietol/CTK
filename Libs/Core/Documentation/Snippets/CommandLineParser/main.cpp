@@ -3,6 +3,7 @@
 
 #include <QCoreApplication>
 #include <QTextStream>
+#include <QIODevice>
 
 #include <cstdlib>
 

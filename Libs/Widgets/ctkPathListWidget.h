@@ -26,6 +26,7 @@
 
 // Qt includes
 #include <QListView>
+#include <QObject>
 
 // QtGUI includes
 #include "ctkWidgetsExport.h"

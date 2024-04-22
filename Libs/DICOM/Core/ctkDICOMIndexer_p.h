@@ -22,6 +22,8 @@
 #define CTKDICOMINDEXERPRIVATE_H
 
 #include <QObject>
+#include <QMutex>
+#include <QRecursiveMutex>
 
 #include "ctkDICOMIndexer.h"
 #include "ctkDICOMItem.h"
@@ -50,7 +52,7 @@ public:
   DICOMIndexingQueue()
     : IsIndexing(false)
     , StopRequested(false)
-    , Mutex(QMutex::Recursive)
+    , Mutex()
   {
   }
 
@@ -198,7 +200,7 @@ protected:
   bool IsIndexing;
   bool StopRequested;
 
-  mutable QMutex Mutex;
+  mutable QRecursiveMutex Mutex;
 };
 
 

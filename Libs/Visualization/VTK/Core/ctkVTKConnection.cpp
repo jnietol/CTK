@@ -24,6 +24,7 @@
 #include <QRegExp>
 #include <QString>
 #include <QTextStream>
+#include <QRegularExpression>
 
 // CTK includes
 #include "ctkUtils.h"
@@ -323,7 +324,7 @@ void ctkVTKConnection::setup(vtkObject* vtk_obj, unsigned long vtk_event,
   d->Priority = priority;
   d->ConnectionType = connectionType;
 
-  if (d->QtSlot.contains(QRegExp(QString("\\( ?vtkObject ?\\* ?, ?vtkObject ?\\* ?\\)"))))
+  if (d->QtSlot.contains(QRegularExpression(QString("\\( ?vtkObject ?\\* ?, ?vtkObject ?\\* ?\\)"))))
   {
     d->SlotType = ctkVTKConnectionPrivate::ARG_VTKOBJECT_AND_VTKOBJECT;
   }

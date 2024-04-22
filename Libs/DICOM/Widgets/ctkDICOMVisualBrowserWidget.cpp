@@ -25,7 +25,7 @@
 #include <QCloseEvent>
 #include <QDebug>
 #include <QDate>
-#include <QDesktopWidget>
+#include <QScreen>
 #include <QFormLayout>
 #include <QMap>
 #include <QMenu>
@@ -72,7 +72,7 @@ public:
     this->setModal(true);
     this->setSizeGripEnabled(true);
     QVBoxLayout* layout = new QVBoxLayout(this);
-    layout->setMargin(0);
+    //layout->setMargin(0);
     this->tagListWidget = new ctkDICOMObjectListWidget();
     layout->addWidget(this->tagListWidget);
   }
@@ -103,10 +103,10 @@ public:
     if (!this->savedGeometry.isEmpty())
     {
       this->restoreGeometry(this->savedGeometry);
-      if (this->isMaximized())
-      {
-        this->setGeometry(QApplication::desktop()->availableGeometry(this));
-      }
+      //if (this->isMaximized())
+      //{
+      //  this->setGeometry(QApplication::desktop()->availableGeometry(this));
+      //}
     }
   }
 

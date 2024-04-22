@@ -23,6 +23,7 @@
 #include <QDebug>
 #include <QPointer>
 #include <QStyle>
+#include <QRegExp>
 
 // CTK includes
 #include "ctkPushButton.h"

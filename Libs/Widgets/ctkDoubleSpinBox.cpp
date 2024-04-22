@@ -398,7 +398,7 @@ double ctkDoubleSpinBoxPrivate
   // could be because of group separators:
   if (!ok && state == QValidator::Acceptable)
   {
-    if (q->locale().groupSeparator().isPrint())
+    if (q->locale().groupSeparator().isValidUtf16())
     {
       int start = (dec == -1 ? text.size() : dec)- 1;
       int lastGroupSeparator = start;
@@ -1087,8 +1087,7 @@ QSize ctkDoubleSpinBox::sizeHint() const
 
   opt.rect = this->rect();
   d->CachedSizeHint = this->style()->sizeFromContents(
-    QStyle::CT_SpinBox, &opt, newSizeHint, this)
-    .expandedTo(QApplication::globalStrut());
+    QStyle::CT_SpinBox, &opt, newSizeHint, this);
   return d->CachedSizeHint;
 }
 
@@ -1143,8 +1142,7 @@ QSize ctkDoubleSpinBox::minimumSizeHint() const
 
   opt.rect = this->rect();
   d->CachedMinimumSizeHint = this->style()->sizeFromContents(
-    QStyle::CT_SpinBox, &opt, newSizeHint, this)
-    .expandedTo(QApplication::globalStrut());
+    QStyle::CT_SpinBox, &opt, newSizeHint, this);
   return d->CachedMinimumSizeHint;
 }
 

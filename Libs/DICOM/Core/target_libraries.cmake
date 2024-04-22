@@ -4,7 +4,48 @@
 # This file should list the libraries required to build the current CTK libraries
 #
 
+set(DCMTK_LIBRARIES2
+    libcmr.a
+    libdcmdata.a
+    libdcmdsig.a
+    libdcmect.a
+    libdcmfg.a
+    libdcmimage.a
+    libdcmimgle.a
+    libdcmiod.a
+    libdcmjpeg.a
+    libdcmjpls.a
+    libdcmnet.a
+    libdcmpmap.a
+    libdcmpstat.a
+    libdcmqrdb.a
+    libdcmrt.a
+    libdcmseg.a
+    libdcmsr.a
+    libdcmtkcharls.a
+    libdcmtls.a
+    libdcmtract.a
+    libdcmwlm.a
+    libdcmxml.a
+    libi2d.a
+    libijg8.a
+    libijg12.a
+    libijg16.a
+    liboficonv.a
+    liboflog.a
+    libofstd.a
+    libicuuc.so
+    libicudata.so
+    libz.so
+    libxml2.so
+    libtiff.so
+    libjpeg.so
+    libpng.so
+    libssl.so
+    libcrypto.so
+)
+
 set(target_libraries
   CTKCore
-  DCMTK_LIBRARIES
+  DCMTK_LIBRARIES2
   )

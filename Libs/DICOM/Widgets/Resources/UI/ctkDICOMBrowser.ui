@@ -106,14 +106,14 @@
       <number>0</number>
      </property>
      <item>
-      <widget class="ctkDICOMTableManager" name="dicomTableManager">
+      <widget class="ctkDICOMTableManager" name="dicomTableManager" native="true">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <property name="dynamicTableLayout">
+       <property name="dynamicTableLayout" stdset="0">
         <bool>true</bool>
        </property>
        <property name="m_DynamicLayout" stdset="0">
@@ -211,7 +211,7 @@
     </widget>
    </item>
    <item>
-    <widget class="ctkDirectoryButton" name="DirectoryButton"/>
+    <widget class="ctkDirectoryButton" name="DirectoryButton" native="true"/>
    </item>
   </layout>
   <action name="ActionImport">
@@ -362,7 +362,7 @@
    <sender>ActionRepair</sender>
    <signal>triggered()</signal>
    <receiver>ctkDICOMBrowser</receiver>
-   <slot>onRepairAction()</slot>
+   <slot>onRepair()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>-1</x>
@@ -403,6 +403,7 @@
   <slot>onPreviousSeries()</slot>
   <slot>onNextStudy()</slot>
   <slot>onPreviousStudy()</slot>
+  <slot>onRepair()</slot>
   <slot>onAutoPlayCheckboxStateChanged(int)</slot>
   <slot>onThumbnailWidthSliderValueChanged(int)</slot>
   <slot>onRemoveAction()</slot>

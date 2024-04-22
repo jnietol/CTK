@@ -113,3 +113,19 @@ By utilizing this integrated approach, CTK facilitates the management and custom
 ## License
 
 CTK code is licensed under Apache 2.0. This means that users of CTK are allowed to use the code for academic, commercial, or other purposes without paying license fees or being restricted in their ability to redistribute their code or keep it private.
+
+## Configure Parameters
+
+```
+-DCMAKE_PREFIX_PATH:PATH=~/CraftRoot
+-DCTK_QT_VERSION:STRING=6
+-DCTK_SUPERBUILD:BOOL=OFF
+-DBUILD_TESTING:BOOL=OFF
+-DCTK_ENABLE_Widgets:BOOL=ON
+-DCTK_LIB_Visualization/VTK/Core:BOOL=ON
+-DCTK_LIB_Visualization/VTK/Widgets:BOOL=ON
+-DCTK_ENABLE_DICOM:BOOL=ON
+-DCTK_LIB_Scripting/Python/Core:BOOL=ON
+-DCTK_LIB_Scripting/Python/Widgets:BOOL=ON
+
+```

@@ -75,18 +75,18 @@ macro(ctkMacroBuildApp)
   set(MY_MOC_CPP)
   set(MY_QRC_SRCS)
 
-  if(CTK_QT_VERSION VERSION_EQUAL "5")
+  if(CTK_QT_VERSION VERSION_EQUAL "6")
     # Wrap
     if(MY_MOC_SRCS)
       # this is a workaround for Visual Studio. The relative include paths in the generated
       # moc files can get very long and can't be resolved by the MSVC compiler.
       foreach(moc_src ${MY_MOC_SRCS})
-        QT5_WRAP_CPP(MY_MOC_CPP ${moc_src} OPTIONS -f${moc_src} OPTIONS -DHAVE_QT5)
+        qt_wrap_cpp(MY_MOC_CPP ${moc_src} OPTIONS -f${moc_src} OPTIONS -DHAVE_QT6)
       endforeach()
     endif()
-    QT5_WRAP_UI(MY_UI_CPP ${MY_UI_FORMS})
+    qt_wrap_ui(MY_UI_CPP ${MY_UI_FORMS})
     if(DEFINED MY_RESOURCES)
-      QT5_ADD_RESOURCES(MY_QRC_SRCS ${MY_RESOURCES})
+      qt_add_resources(MY_QRC_SRCS ${MY_RESOURCES})
     endif()
   else()
     message(FATAL_ERROR "Support for Qt${CTK_QT_VERSION} is not implemented")

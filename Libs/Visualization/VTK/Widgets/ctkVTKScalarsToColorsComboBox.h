@@ -27,6 +27,7 @@
 
 // VTK includes
 #include <vtkSmartPointer.h>
+#include <vtkScalarsToColors.h>
 
 class ctkVTKScalarsToColorsComboBoxPrivate;
 class vtkScalarsToColors;

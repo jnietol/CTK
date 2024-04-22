@@ -12,8 +12,8 @@ set(KITTests_MOC_SRCS
   ctkXnatSessionTest.h
   )
 
-if(CTK_QT_VERSION VERSION_EQUAL "5")
-  qt5_wrap_cpp(KITTests_MOC_CPP ${KITTests_MOC_SRCS})
+if(CTK_QT_VERSION VERSION_EQUAL "6")
+  qt_wrap_cpp(KITTests_MOC_CPP ${KITTests_MOC_SRCS})
 else()
   message(FATAL_ERROR "Support for Qt${CTK_QT_VERSION} is not implemented")
 endif()

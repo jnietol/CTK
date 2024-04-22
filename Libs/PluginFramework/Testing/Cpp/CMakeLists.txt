@@ -13,7 +13,7 @@ set(MOC_SRCS )
 
 set(MY_MOC_CXX )
 
-#QT5_WRAP_CPP(MY_MOC_CXX ${MOC_SRCS})
+#qt_wrap_cpp(MY_MOC_CXX ${MOC_SRCS})
 
 set(lib_name ${fwtestutil_lib})
 

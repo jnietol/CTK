@@ -329,9 +329,9 @@ bool ctkDICOMDatabasePrivate::insertPatient(const ctkDICOMItem& dataset, int& db
     logger.debug("Found patient in the database as UId: " + QString::number(dbPatientID));
     foreach(QString key, this->InsertedPatientsCompositeIDCache.keys())
     {
-      logger.debug("Patient ID cache item: " + key + "->" + this->InsertedPatientsCompositeIDCache[key]);
+        logger.debug("Patient ID cache item: " + key + "->" + QChar(this->InsertedPatientsCompositeIDCache[key]));
     }
-    logger.debug("New patient ID cache item: " + compositeID + "->" + dbPatientID);
+    logger.debug("New patient ID cache item: " + compositeID + "->" + QChar(dbPatientID));
     this->InsertedPatientsCompositeIDCache[compositeID] = dbPatientID;
     return false;
   }

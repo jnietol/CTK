@@ -23,7 +23,7 @@
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
 #include <QScreen>
 #else
-#include <QDesktopWidget>
+#include <QScreen>
 #endif
 #include <QEvent>
 #include <QHeaderView>

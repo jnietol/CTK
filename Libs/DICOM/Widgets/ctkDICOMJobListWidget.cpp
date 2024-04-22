@@ -1063,7 +1063,7 @@ void ctkDICOMJobListWidget::onJobFailed(QVariant data)
 void ctkDICOMJobListWidget::onFilterTextChanged(QString text)
 {
   Q_D(ctkDICOMJobListWidget);
-  d->proxyModel->setFilterRegExp(text);
+  d->proxyModel->setFilterRegularExpression(text);
 }
 
 //----------------------------------------------------------------------------
@@ -1175,7 +1175,7 @@ void ctkDICOMJobListWidget::onShowCompletedButtonToggled(bool toggled)
 {
   Q_D(ctkDICOMJobListWidget);
   QString text = toggled ? "" : tr("initialized|queued|in-progress|canceled|failed");
-  d->showCompletedProxyModel->setFilterRegExp(text);
+  d->showCompletedProxyModel->setFilterRegularExpression(text);
 }
 
 //----------------------------------------------------------------------------

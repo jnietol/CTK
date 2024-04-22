@@ -37,8 +37,8 @@ set(MOC_SRCS )
 
 set(MY_MOC_CXX )
 
-if(CTK_QT_VERSION VERSION_EQUAL "5")
-  qt5_wrap_cpp(MY_MOC_CXX ${MOC_SRCS})
+if(CTK_QT_VERSION VERSION_EQUAL "6")
+  qt_wrap_cpp(MY_MOC_CXX ${MOC_SRCS})
 else()
   message(FATAL_ERROR "Support for Qt${CTK_QT_VERSION} is not implemented")
 endif()

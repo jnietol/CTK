@@ -24,6 +24,15 @@ if(CTK_USE_QTTESTING)
     )
 endif()
 
+execute_process(
+    COMMAND ${CRAFTROOT_DIR}/libexec/moc -o ${CMAKE_CURRENT_BINARY_DIR}/moc_ctkPathLineEdit.cpp ${CMAKE_CURRENT_SOURCE_DIR}/ctkPathLineEdit.h
+)
+
+execute_process(
+    COMMAND ${CRAFTROOT_DIR}/libexec/moc -o ${CMAKE_CURRENT_BINARY_DIR}/moc_ctkPathListWidget.cpp ${CMAKE_CURRENT_SOURCE_DIR}/ctkPathListWidget.h
+)
+
+
 # Source files
 set(KIT_SRCS
   ctkActionsWidget.cpp
@@ -313,7 +322,7 @@ set(KIT_MOC_SRCS
   ctkWorkflowWidgetStep_p.h
   )
 
-if(CTK_QT_VERSION VERSION_EQUAL "5")
+if(CTK_QT_VERSION VERSION_EQUAL "6")
   list(APPEND KIT_MOC_SRCS ctkIconEnginePlugin_qt5.h)
 else()
   message(FATAL_ERROR "Support for Qt${CTK_QT_VERSION} is not implemented")
@@ -321,10 +330,18 @@ endif()
 
 # Headers that should run through moc without adding
 # the generated cpp file to the source list
-set(KIT_GENERATE_MOC_SRCS
-  ctkPathLineEdit.h
-  ctkPathListWidget.h
-  )
+#set(KIT_GENERATE_MOC_SRCS
+#  ctkPathLineEdit.h
+#  ctkPathListWidget.h
+#  )
+
+
+
+#add_custom_command(
+#    OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/moc_ctkPathListWidget.cpp
+#    COMMAND ${CRAFTROOT_DIR}/libexec/moc -o ${CMAKE_CURRENT_BINARY_DIR}/ctkPathListWidget.h ${CMAKE_CURRENT_SOURCE_DIR}/moc_ctkPathListWidget.cpp
+#
+#)
 
 # UI files
 set(KIT_UI_FORMS
@@ -352,7 +369,7 @@ set(KIT_resources
 # The following macro will read the target libraries from the file 'target_libraries.cmake'
 ctkFunctionGetTargetLibraries(KIT_target_libraries)
 
-  list(APPEND KIT_target_libraries Qt5::Widgets Qt5::Xml Qt5::OpenGL)
+  list(APPEND KIT_target_libraries Qt${CTK_QT_VERSION}::Widgets Qt${CTK_QT_VERSION}::Xml Qt${CTK_QT_VERSION}::OpenGL Qt${CTK_QT_VERSION}::OpenGLWidgets Qt6::Core5Compat)
 
 # A player and a translator must be added for custom Qt widgets
 if(CTK_USE_QTTESTING)

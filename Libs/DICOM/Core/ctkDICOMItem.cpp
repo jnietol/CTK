@@ -18,6 +18,7 @@
   limitations under the License.
 
 =============================================================================*/
+#include <QTextDecoder>
 
 #include "ctkDICOMItem.h"
 

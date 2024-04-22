@@ -135,7 +135,7 @@ private:
 //------------------------------------------------------------------------------
 struct CTK_DICOM_CORE_EXPORT ctkDICOMJobDetail : ctkJobDetail
 {
-  explicit ctkDICOMJobDetail() = default;
+  ctkDICOMJobDetail() = default;
 
   explicit ctkDICOMJobDetail(const ctkDICOMJob& job) : ctkJobDetail(job)
   {

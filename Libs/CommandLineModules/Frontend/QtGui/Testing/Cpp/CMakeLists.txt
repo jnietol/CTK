@@ -27,16 +27,16 @@ include_directories(
 set(Tests_MOC_CPP)
 set(Tests_UI_CPP)
 set(Tests_RESOURCES_SRCS)
-if(CTK_QT_VERSION VERSION_EQUAL "5")
-  QT5_WRAP_CPP(Tests_MOC_CPP ${Tests_MOC_SRCS})
-  QT5_GENERATE_MOCS(
+if(CTK_QT_VERSION VERSION_EQUAL "6")
+  qt_wrap_cpp(Tests_MOC_CPP ${Tests_MOC_SRCS})
+  qt_generate_moc(
     ctkCmdLineModuleFrontendQtGuiTest.cpp
     ctkCmdLineModuleQtXslTransformTest.cpp
     )
   if(TEST_UI_FORMS)
-    QT5_WRAP_UI(Tests_UI_CPP ${Tests_UI_FORMS})
+    qt_wrap_ui(Tests_UI_CPP ${Tests_UI_FORMS})
   endif()
-  QT5_ADD_RESOURCES(Tests_RESOURCES_SRCS ${Tests_RESOURCES})
+  qt_add_resources(Tests_RESOURCES_SRCS ${Tests_RESOURCES})
 else()
   message(FATAL_ERROR "Support for Qt${CTK_QT_VERSION} is not implemented")
 endif()

@@ -21,7 +21,7 @@
 // Qt includes
 #include <QApplication>
 #include <QDebug>
-#include <QDesktopWidget>
+#include <QScreen>
 #include <QDir>
 #include <QEvent>
 #include <QLabel>

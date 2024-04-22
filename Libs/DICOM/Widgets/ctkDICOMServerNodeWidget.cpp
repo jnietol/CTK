@@ -311,15 +311,15 @@ QMap<QString, QVariant> ctkDICOMServerNodeWidget::serverNodeParameters(const QSt
 
   QMap<QString, QVariant> parameters;
 
-  const int count = d->NodeTable->rowCount();
-  for (int row = 0; row < count; row++)
-  {
-    if ( d->NodeTable->item(row,0)->text() == node )
-    {
-      // TBD: not sure what it means to merge parameters
-      parameters.unite(this->serverNodeParameters(row));
-    }
-  }
+  //const int count = d->NodeTable->rowCount();
+  //for (int row = 0; row < count; row++)
+  //{
+  //  if ( d->NodeTable->item(row,0)->text() == node )
+  //  {
+  //    // TBD: not sure what it means to merge parameters
+  //    parameters.unite(this->serverNodeParameters(row));
+  //  }
+  //}
 
   return parameters;
 }

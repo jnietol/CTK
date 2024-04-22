@@ -46,8 +46,10 @@ MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 #define __ctkPathLineEdit_h
 
 // Qt includes
+#include <QObject>
 #include <QDir>
 #include <QWidget>
+
 class QComboBox;
 
 // CTK includes

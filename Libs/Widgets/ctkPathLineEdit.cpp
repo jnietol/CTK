@@ -19,6 +19,7 @@
 =========================================================================*/
 
 // Qt includes
+#include <QObject>
 #include <QAbstractItemView>
 #include <QApplication>
 #include <QComboBox>
@@ -29,7 +30,7 @@
 #include <QHBoxLayout>
 #include <QLineEdit>
 #include <QRegExp>
-#include <QRegExpValidator>
+#include <QRegularExpressionValidator>
 #include <QSettings>
 #include <QStyleOptionComboBox>
 #include <QToolButton>
@@ -293,7 +294,7 @@ public:
   mutable QSize MinimumSizeHint;
 
   ctkFileCompleter* Completer;
-  QRegExpValidator* Validator;
+  QRegularExpressionValidator* Validator;
 };
 
 QString ctkPathLineEditPrivate::sCurrentDirectory = "";
@@ -325,7 +326,7 @@ void ctkPathLineEditPrivate::init()
   this->Completer = new ctkFileCompleter(q, true);
 
   // don't accept invalid path
-  this->Validator = new QRegExpValidator(q);
+  this->Validator = new QRegularExpressionValidator(q);
 
   this->createPathLineEditWidget(true);
 
@@ -470,7 +471,7 @@ QSize ctkPathLineEditPrivate::recomputeSizeHint(QSize& sh)const
     sh.rwidth() = frame + textWidth + browseWidth;
     sh.rheight() = height;
   }
-  return sh.expandedTo(QApplication::globalStrut());
+  return sh;
 }
 
 //-----------------------------------------------------------------------------
@@ -479,7 +480,7 @@ void ctkPathLineEditPrivate::updateFilter()
   Q_Q(ctkPathLineEdit);
   this->Completer->setShowFiles(this->Filters & QDir::Files);
   this->Completer->setNameFilters(ctk::nameFiltersToExtensions(this->NameFilters));
-  this->Validator->setRegExp(ctk::nameFiltersToRegExp(this->NameFilters));
+  this->Validator->setRegularExpression(ctk::nameFiltersToRegularExpression(this->NameFilters));
 }
 
 //-----------------------------------------------------------------------------

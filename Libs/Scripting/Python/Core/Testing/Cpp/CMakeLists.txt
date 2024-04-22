@@ -16,8 +16,8 @@ include_directories(${CMAKE_SOURCE_DIR}/Libs/Testing
 find_package(Qt${CTK_QT_VERSION} COMPONENTS Test REQUIRED)
 set(CTK_QT_TEST_LIBRARY Qt${CTK_QT_VERSION}::Test)
 
-if(CTK_QT_VERSION VERSION_EQUAL "5")
-  QT5_GENERATE_MOCS(
+if(CTK_QT_VERSION VERSION_EQUAL "6")
+  qt_generate_moc(
     ctkAbstractPythonManagerTest.cpp
     )
 else()
