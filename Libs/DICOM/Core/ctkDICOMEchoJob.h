@@ -21,63 +21,70 @@
 
 =========================================================================*/
 
-#ifndef __ctkDICOMQueryWorker_h
-#define __ctkDICOMQueryWorker_h
+#ifndef __ctkDICOMEchoJob_h
+#define __ctkDICOMEchoJob_h
 
 // Qt includes
-#include <QMap>
 #include <QObject>
 #include <QSharedPointer>
 
+// ctkCore includes
+class ctkAbstractWorker;
+
 // ctkDICOMCore includes
 #include "ctkDICOMCoreExport.h"
-#include "ctkAbstractWorker.h"
-class ctkDICOMQuery;
-class ctkDICOMQueryWorkerPrivate;
+#include "ctkDICOMJob.h"
+class ctkDICOMEchoJobPrivate;
+class ctkDICOMServer;
 
 /// \ingroup DICOM_Core
-class CTK_DICOM_CORE_EXPORT ctkDICOMQueryWorker : public ctkAbstractWorker
+class CTK_DICOM_CORE_EXPORT ctkDICOMEchoJob : public ctkDICOMJob
 {
   Q_OBJECT
 
 public:
-  typedef ctkAbstractWorker Superclass;
-  explicit ctkDICOMQueryWorker();
-  virtual ~ctkDICOMQueryWorker();
-
-  /// Execute worker. This method is run by the QThreadPool and is thread safe
-  void run() override;
-
-  /// Cancel worker. This method is thread safe
-  void requestCancel() override;
+  typedef ctkDICOMJob Superclass;
+  explicit ctkDICOMEchoJob();
+  virtual ~ctkDICOMEchoJob();
 
   ///@{
-  /// Job.
-  /// These methods are not thread safe
-  void setJob(QSharedPointer<ctkAbstractJob> job) override;
-  using ctkAbstractWorker::setJob;
+  /// Server
+  Q_INVOKABLE ctkDICOMServer* server() const;
+  Q_INVOKABLE void setServer(const ctkDICOMServer& server);
   ///@}
 
-  ///@{
-  /// Querier.
-  /// These methods are not thread safe
-  QSharedPointer<ctkDICOMQuery> querierShared() const;
-  Q_INVOKABLE ctkDICOMQuery* querier() const;
-  ///@}
+  /// Logger report string formatting for specific task
+  Q_INVOKABLE QString loggerReport(const QString& status) const override;
+
+  /// \see ctkAbstractJob::clone()
+  Q_INVOKABLE ctkAbstractJob* clone() const override;
+
+  /// Generate worker for job
+  Q_INVOKABLE ctkAbstractWorker* createWorker() override;
+
+  /// Return the QVariant value of this job.
+  ///
+  /// The value is set using the ctkDICOMJobDetail metatype and is used to pass
+  /// information between threads using Qt signals.
+  /// \sa ctkDICOMJobDetail
+  Q_INVOKABLE virtual QVariant toVariant() override;
+
+  /// Return job type.
+  Q_INVOKABLE virtual ctkDICOMJobResponseSet::JobType getJobType() const override;
 
 protected:
-  QScopedPointer<ctkDICOMQueryWorkerPrivate> d_ptr;
+  QScopedPointer<ctkDICOMEchoJobPrivate> d_ptr;
 
   /// Constructor allowing derived class to specify a specialized pimpl.
   ///
   /// \note You are responsible to call init() in the constructor of
   /// derived class. Doing so ensures the derived class is fully
   /// instantiated in case virtual method are called within init() itself.
-  ctkDICOMQueryWorker(ctkDICOMQueryWorkerPrivate* pimpl);
+  ctkDICOMEchoJob(ctkDICOMEchoJobPrivate* pimpl);
 
 private:
-  Q_DECLARE_PRIVATE(ctkDICOMQueryWorker);
-  Q_DISABLE_COPY(ctkDICOMQueryWorker);
+  Q_DECLARE_PRIVATE(ctkDICOMEchoJob);
+  Q_DISABLE_COPY(ctkDICOMEchoJob);
 };
 
 #endif

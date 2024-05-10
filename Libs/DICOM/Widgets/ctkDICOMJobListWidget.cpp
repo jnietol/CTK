@@ -53,6 +53,7 @@ public:
     }
 
     int progress = ceil(float(data.at(0).toInt()) / data.at(1).toInt() * 100);
+    progress = progress < 0 ? 0 : progress;
     progress = progress > 100 ? 100 : progress;
 
     QStyleOptionProgressBar progressBarOption;
@@ -140,36 +141,46 @@ QString QCenteredItemModel::getJobTypeAsString(QString jobClass, ctkDICOMJob::DI
   {
     switch (dicomLevel)
     {
+      case ctkDICOMJob::DICOMLevels::None:
+        logger.warn("ctkDICOMScheduler : DICOMLevels was not set.");
+        return "";
       case ctkDICOMJob::DICOMLevels::Patients:
-        return QObject::tr("Query patients");
+        return QCenteredItemModel::tr("Query patients");
       case ctkDICOMJob::DICOMLevels::Studies:
-        return QObject::tr("Query studies");
+        return QCenteredItemModel::tr("Query studies");
       case ctkDICOMJob::DICOMLevels::Series:
-        return QObject::tr("Query series");
+        return QCenteredItemModel::tr("Query series");
       case ctkDICOMJob::DICOMLevels::Instances:
-        return QObject::tr("Query instances");
+        return QCenteredItemModel::tr("Query instances");
     }
   }
   else if (jobClass == "ctkDICOMRetrieveJob")
   {
     switch (dicomLevel)
     {
+      case ctkDICOMJob::DICOMLevels::None:
+        logger.warn("ctkDICOMScheduler : DICOMLevels was not set.");
+        return "";
       case ctkDICOMJob::DICOMLevels::Patients:
-        return QObject::tr("Retrieve patients");
+        return QCenteredItemModel::tr("Retrieve patients");
       case ctkDICOMJob::DICOMLevels::Studies:
-        return QObject::tr("Retrieve studies");
+        return QCenteredItemModel::tr("Retrieve studies");
       case ctkDICOMJob::DICOMLevels::Series:
-        return QObject::tr("Retrieve series");
+        return QCenteredItemModel::tr("Retrieve series");
       case ctkDICOMJob::DICOMLevels::Instances:
-        return QObject::tr("Retrieve instances");
+        return QCenteredItemModel::tr("Retrieve instances");
     }
   }
   else if (jobClass == "ctkDICOMStorageListenerJob")
   {
-    return QObject::tr("Storage listener");
+    return QCenteredItemModel::tr("Storage listener");
+  }
+  else if (jobClass == "ctkDICOMEchoJob")
+  {
+    return QCenteredItemModel::tr("Echo server");
   }
 
-  return QObject::tr("");
+  return QCenteredItemModel::tr("");
 }
 
 //----------------------------------------------------------------------------
@@ -194,7 +205,7 @@ void QCenteredItemModel::addJob(const ctkDICOMJobDetail &td,
   this->setData(this->index(row, Columns::JobType), jobType, Qt::ToolTipRole);
 
   QIcon statusIcon = QIcon(":/Icons/pending.svg");
-  QString statusText = QObject::tr("initialized");
+  QString statusText = QCenteredItemModel::tr("initialized");
   QStandardItem *statusItem = new QStandardItem(QString("statusItem"));
   statusItem->setIcon(statusIcon);
   this->setItem(row, Columns::Status, statusItem);
@@ -417,67 +428,67 @@ void QCenteredItemModel::clearCompletedJobs()
 //----------------------------------------------------------------------------
 QCenteredItemModel::Columns QCenteredItemModel::getColumnIndexFromString(QString columnString)
 {
-  if (columnString == QObject::tr("Type"))
+  if (columnString == QCenteredItemModel::tr("Type"))
   {
     return Columns::JobType;
   }
-  else if (columnString == QObject::tr("Status"))
+  else if (columnString == QCenteredItemModel::tr("Status"))
   {
     return Columns::Status;
   }
-  else if (columnString == QObject::tr("Progress"))
+  else if (columnString == QCenteredItemModel::tr("Progress"))
   {
     return Columns::Progress;
   }
-  else if (columnString == QObject::tr("Time and Date"))
+  else if (columnString == QCenteredItemModel::tr("Time and Date"))
   {
     return Columns::CreationDateTime;
   }
-  else if (columnString == QObject::tr("Starting Time and Date"))
+  else if (columnString == QCenteredItemModel::tr("Starting Time and Date"))
   {
     return Columns::StartDateTime;
   }
-  else if (columnString == QObject::tr("Completion Time and Date"))
+  else if (columnString == QCenteredItemModel::tr("Completion Time and Date"))
   {
     return Columns::CompletionDateTime;
   }
-  else if (columnString == QObject::tr("DICOM Level"))
+  else if (columnString == QCenteredItemModel::tr("DICOM Level"))
   {
     return Columns::DICOMLevel;
   }
-  else if (columnString == QObject::tr("Patient ID"))
+  else if (columnString == QCenteredItemModel::tr("Patient ID"))
   {
     return Columns::PatientID;
   }
-  else if (columnString == QObject::tr("Patient Name"))
+  else if (columnString == QCenteredItemModel::tr("Patient Name"))
   {
     return Columns::PatientName;
   }
-  else if (columnString == QObject::tr("Birth Date"))
+  else if (columnString == QCenteredItemModel::tr("Birth Date"))
   {
     return Columns::PatientBirthDate;
   }
-  else if (columnString == QObject::tr("Study UID"))
+  else if (columnString == QCenteredItemModel::tr("Study UID"))
   {
     return Columns::StudyInstanceUID;
   }
-  else if (columnString == QObject::tr("Series UID"))
+  else if (columnString == QCenteredItemModel::tr("Series UID"))
   {
     return Columns::SeriesInstanceUID;
   }
-  else if (columnString == QObject::tr("SOP UID"))
+  else if (columnString == QCenteredItemModel::tr("SOP UID"))
   {
     return Columns::SOPInstanceUID;
   }
-  else if (columnString == QObject::tr("Connection"))
+  else if (columnString == QCenteredItemModel::tr("Connection"))
   {
     return Columns::Connection;
   }
-  else if (columnString == QObject::tr("Job UID"))
+  else if (columnString == QCenteredItemModel::tr("Job UID"))
   {
     return Columns::JobUID;
   }
-  else if (columnString == QObject::tr("Class"))
+  else if (columnString == QCenteredItemModel::tr("Class"))
   {
     return Columns::JobClass;
   }
@@ -493,39 +504,39 @@ QString QCenteredItemModel::getColumnStringFromIndex(Columns columnIndex)
   switch (columnIndex)
   {
     case Columns::JobType:
-      return QObject::tr("Type");
+      return QCenteredItemModel::tr("Type");
     case Columns::Status:
-      return QObject::tr("Status");
+      return QCenteredItemModel::tr("Status");
     case Columns::Progress:
-      return QObject::tr("Progress");
+      return QCenteredItemModel::tr("Progress");
     case Columns::CreationDateTime:
-      return QObject::tr("Time and Date");
+      return QCenteredItemModel::tr("Time and Date");
     case Columns::StartDateTime:
-      return QObject::tr("Starting Time and Date");
+      return QCenteredItemModel::tr("Starting Time and Date");
     case Columns::CompletionDateTime:
-      return QObject::tr("Completion Time and Date");
+      return QCenteredItemModel::tr("Completion Time and Date");
     case Columns::DICOMLevel:
-      return QObject::tr("DICOM Level");
+      return QCenteredItemModel::tr("DICOM Level");
     case Columns::PatientID:
-      return QObject::tr("Patient ID");
+      return QCenteredItemModel::tr("Patient ID");
     case Columns::PatientName:
-      return QObject::tr("Patient Name");
+      return QCenteredItemModel::tr("Patient Name");
     case Columns::PatientBirthDate:
-      return QObject::tr("Birth Date");
+      return QCenteredItemModel::tr("Birth Date");
     case Columns::StudyInstanceUID:
-      return QObject::tr("Study UID");
+      return QCenteredItemModel::tr("Study UID");
     case Columns::SeriesInstanceUID:
-      return QObject::tr("Series UID");
+      return QCenteredItemModel::tr("Series UID");
     case Columns::SOPInstanceUID:
-      return QObject::tr("SOP UID");
+      return QCenteredItemModel::tr("SOP UID");
     case Columns::Connection:
-      return QObject::tr("Connection");
+      return QCenteredItemModel::tr("Connection");
     case Columns::JobUID:
-      return QObject::tr("Job UID");
+      return QCenteredItemModel::tr("Job UID");
     case Columns::JobClass:
-      return QObject::tr("Class");
+      return QCenteredItemModel::tr("Class");
     default:
-      return QObject::tr("");
+      return QCenteredItemModel::tr("");
   }
 }
 
@@ -767,38 +778,83 @@ void ctkDICOMJobListWidgetPrivate::updateJobsDetailsWidget()
     QString jobClass = this->showCompletedProxyModel->index
       (row, QCenteredItemModel::Columns::JobClass).data().toString();
 
-    detailsText.append(QCenteredItemModel::getColumnStringFromIndex(QCenteredItemModel::Columns::JobType));
-    detailsText.append(QString(" : ") + jobType + QString(" \n"));
+    if (!jobType.isEmpty())
+    {
+      detailsText.append(QCenteredItemModel::getColumnStringFromIndex(QCenteredItemModel::Columns::JobType));
+      detailsText.append(QString(" : ") + jobType + QString(" \n"));
+    }
+    if (!jobUID.isEmpty())
+    {
+      detailsText.append(QCenteredItemModel::getColumnStringFromIndex(QCenteredItemModel::Columns::JobUID));
+      detailsText.append(QString(" : ") + jobUID + QString(" \n"));
+    }
+    if (!jobClass.isEmpty())
+    {
+      detailsText.append(QCenteredItemModel::getColumnStringFromIndex(QCenteredItemModel::Columns::JobClass));
+      detailsText.append(QString(" : ") + jobClass + QString(" \n"));
+    }
+    if (!connection.isEmpty())
+    {
+      detailsText.append(QCenteredItemModel::getColumnStringFromIndex(QCenteredItemModel::Columns::Connection));
+      detailsText.append(QString(" : ") + connection + QString(" \n"));
+    }
+    if (!status.isEmpty())
+    {
     detailsText.append(QCenteredItemModel::getColumnStringFromIndex(QCenteredItemModel::Columns::Status));
     detailsText.append(QString(" : ") + status + QString(" \n"));
+    }
+    if (!creationDateTime.isEmpty())
+    {
     detailsText.append(QCenteredItemModel::getColumnStringFromIndex(QCenteredItemModel::Columns::CreationDateTime));
     detailsText.append(QString(" : ") + creationDateTime + QString(" \n"));
+    }
+    if (!startDateTime.isEmpty())
+    {
     detailsText.append(QCenteredItemModel::getColumnStringFromIndex(QCenteredItemModel::Columns::StartDateTime));
     detailsText.append(QString(" : ") + startDateTime + QString(" \n"));
+    }
+    if (!completionDateTime.isEmpty())
+    {
     detailsText.append(QCenteredItemModel::getColumnStringFromIndex(QCenteredItemModel::Columns::CompletionDateTime));
     detailsText.append(QString(" : ") + completionDateTime + QString(" \n"));
+    }
+    if (!dicomLevel.isEmpty() && dicomLevel != "None")
+    {
     detailsText.append(QCenteredItemModel::getColumnStringFromIndex(QCenteredItemModel::Columns::DICOMLevel));
     detailsText.append(QString(" : ") + dicomLevel + QString(" \n"));
+    }
+    if (!patientID.isEmpty())
+    {
     detailsText.append(QCenteredItemModel::getColumnStringFromIndex(QCenteredItemModel::Columns::PatientID));
     detailsText.append(QString(" : ") + patientID + QString(" \n"));
+    }
+    if (!patientName.isEmpty())
+    {
     detailsText.append(QCenteredItemModel::getColumnStringFromIndex(QCenteredItemModel::Columns::PatientName));
     detailsText.append(QString(" : ") + patientName + QString(" \n"));
+    }
+    if (!patientBirthDate.isEmpty())
+    {
     detailsText.append(QCenteredItemModel::getColumnStringFromIndex(QCenteredItemModel::Columns::PatientBirthDate));
     detailsText.append(QString(" : ") + patientBirthDate + QString(" \n"));
+    }
+    if (!studyInstanceUID.isEmpty())
+    {
     detailsText.append(QCenteredItemModel::getColumnStringFromIndex(QCenteredItemModel::Columns::StudyInstanceUID));
     detailsText.append(QString(" : ") + studyInstanceUID + QString(" \n"));
+    }
+    if (!seriesInstanceUID.isEmpty())
+    {
     detailsText.append(QCenteredItemModel::getColumnStringFromIndex(QCenteredItemModel::Columns::SeriesInstanceUID));
     detailsText.append(QString(" : ") + seriesInstanceUID + QString(" \n"));
+    }
+    if (!sopInstanceUID.isEmpty())
+    {
     detailsText.append(QCenteredItemModel::getColumnStringFromIndex(QCenteredItemModel::Columns::SOPInstanceUID));
     detailsText.append(QString(" : ") + sopInstanceUID + QString(" \n"));
-    detailsText.append(QCenteredItemModel::getColumnStringFromIndex(QCenteredItemModel::Columns::Connection));
-    detailsText.append(QString(" : ") + connection + QString(" \n"));
-    detailsText.append(QCenteredItemModel::getColumnStringFromIndex(QCenteredItemModel::Columns::JobUID));
-    detailsText.append(QString(" : ") + jobUID + QString(" \n"));
-    detailsText.append(QCenteredItemModel::getColumnStringFromIndex(QCenteredItemModel::Columns::JobClass));
-    detailsText.append(QString(" : ") + jobClass + QString(" \n"));
+    }
 
-    detailsText.append(QString("Logger : ") + QString(" \n"));
+    //detailsText.append(QString("Logger : ") + QString(" \n"));
     // To Do: get DCMTK logging stream per job
   }
 
@@ -820,7 +876,7 @@ void ctkDICOMJobListWidgetPrivate::retryJobs()
       (row, QCenteredItemModel::Columns::JobClass).data().toString();
     QString jobUID = this->showCompletedProxyModel->index
       (row, QCenteredItemModel::Columns::JobUID).data().toString();
-    if (status != QObject::tr("failed") && status != QObject::tr("canceled"))
+    if (status != ctkDICOMJobListWidget::tr("failed") && status != ctkDICOMJobListWidget::tr("canceled"))
     {
       continue;
     }
@@ -836,8 +892,12 @@ void ctkDICOMJobListWidgetPrivate::retryJobs()
 
     QString DICOMLevelString = this->showCompletedProxyModel->index
       (row, QCenteredItemModel::Columns::DICOMLevel).data().toString();
-    ctkDICOMJob::DICOMLevels DICOMLevel = ctkDICOMJob::DICOMLevels::Patients;
-    if (DICOMLevelString == "Studies")
+    ctkDICOMJob::DICOMLevels DICOMLevel = ctkDICOMJob::DICOMLevels::None;
+    if (DICOMLevelString == "Patients")
+    {
+      DICOMLevel = ctkDICOMJob::DICOMLevels::Patients;
+    }
+    else if (DICOMLevelString == "Studies")
     {
       DICOMLevel = ctkDICOMJob::DICOMLevels::Studies;
     }

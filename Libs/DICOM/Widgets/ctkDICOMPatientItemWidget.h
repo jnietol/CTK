@@ -46,8 +46,10 @@ class CTK_DICOM_WIDGETS_EXPORT ctkDICOMPatientItemWidget : public QWidget
   Q_ENUMS(DateType)
   Q_PROPERTY(QString patientItem READ patientItem WRITE setPatientItem);
   Q_PROPERTY(QString patientID READ patientID WRITE setPatientID);
+  Q_PROPERTY(QString patientName READ patientName WRITE setPatientName);
   Q_PROPERTY(int numberOfStudiesPerPatient READ numberOfStudiesPerPatient WRITE setNumberOfStudiesPerPatient);
   Q_PROPERTY(ctkDICOMStudyItemWidget::ThumbnailSizeOption thumbnailSize READ thumbnailSize WRITE setThumbnailSize);
+  Q_PROPERTY(QStringList allowedServers READ allowedServers WRITE setAllowedServers);
 
 public:
   typedef QWidget Superclass;
@@ -64,6 +66,12 @@ public:
   /// Patient ID
   void setPatientID(const QString& patientID);
   QString patientID() const;
+  ///@}
+
+  ///@{
+  /// Patient Name
+  void setPatientName(const QString& patientName);
+  QString patientName() const;
   ///@}
 
   ///@{
@@ -155,16 +163,27 @@ public:
   /// Add/Remove study item widgets
   Q_INVOKABLE void addStudyItemWidget(const QString& studyItem);
   Q_INVOKABLE void removeStudyItemWidget(const QString& studyItem);
+  Q_INVOKABLE ctkDICOMStudyItemWidget* studyItemWidgetByStudyItem(const QString& studyItem);
   ///@}
 
   /// Set selection for all studies/series
   Q_INVOKABLE void setSelection(bool selected);
 
+  ///@{
+  /// Allowed Servers
+  /// Empty by default
+  void setAllowedServers(const QStringList& allowedServers);
+  QStringList allowedServers() const;
+  Q_INVOKABLE void updateAllowedServersUIFromDB();
+  ///@}
+
 public Q_SLOTS:
-  void generateStudies();
+  void generateStudies(bool queryRetrieve = true);
+  void generateSeriesAtToggle(bool toggled = true, const QString& studyItem = "");
   void updateGUIFromScheduler(const QVariant& data);
   void onSeriesItemClicked();
   void raiseSelectedSeriesJobsPriority();
+  void onPatientServersCheckableComboBoxChanged();
 
 protected:
   QScopedPointer<ctkDICOMPatientItemWidgetPrivate> d_ptr;

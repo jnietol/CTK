@@ -188,6 +188,13 @@ public:
   Q_INVOKABLE QString fieldForStudy(const QString field, const QString studyInstanceUID);
   Q_INVOKABLE QString fieldForSeries(const QString field, const QString seriesInstanceUID);
 
+  /// Provide lists of allow and deny servers associated with the patient.
+  Q_INVOKABLE QMap<QString, QStringList> connectionsInformationForPatient(const QString patientUID);
+  /// Set the allow and deny servers for the patient
+  Q_INVOKABLE bool updateConnectionsForPatient(const QString patientUID,
+                                               const QStringList allowList,
+                                               const QStringList denyList);
+
   QStringList patientFieldNames() const;
   QStringList studyFieldNames() const;
   QStringList seriesFieldNames() const;
@@ -420,6 +427,13 @@ Q_SIGNALS:
   ///  - QString: patient Name (not unique)
   ///  - QString: patient Birth Date (not unique)
   void patientAdded(int, QString, QString, QString);
+  /// connectionNameAdded arguments:
+  ///  - int: database index of patient (unique) within CTK database
+  ///  - QString: patient ID (not unique across institutions)
+  ///  - QString: patient Name (not unique)
+  ///  - QString: patient Birth Date (not unique)
+  ///  - QString: connection name
+  void connectionNameAdded(int, QString, QString, QString, QString);
   /// studyAdded arguments:
   ///  - studyUID (unique)
   void studyAdded(QString);

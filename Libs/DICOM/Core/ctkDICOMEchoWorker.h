@@ -21,29 +21,28 @@
 
 =========================================================================*/
 
-#ifndef __ctkDICOMQueryWorker_h
-#define __ctkDICOMQueryWorker_h
+#ifndef __ctkDICOMEchoWorker_h
+#define __ctkDICOMEchoWorker_h
 
 // Qt includes
-#include <QMap>
 #include <QObject>
 #include <QSharedPointer>
 
 // ctkDICOMCore includes
 #include "ctkDICOMCoreExport.h"
 #include "ctkAbstractWorker.h"
-class ctkDICOMQuery;
-class ctkDICOMQueryWorkerPrivate;
+class ctkDICOMEcho;
+class ctkDICOMEchoWorkerPrivate;
 
 /// \ingroup DICOM_Core
-class CTK_DICOM_CORE_EXPORT ctkDICOMQueryWorker : public ctkAbstractWorker
+class CTK_DICOM_CORE_EXPORT ctkDICOMEchoWorker : public ctkAbstractWorker
 {
   Q_OBJECT
 
 public:
   typedef ctkAbstractWorker Superclass;
-  explicit ctkDICOMQueryWorker();
-  virtual ~ctkDICOMQueryWorker();
+  explicit ctkDICOMEchoWorker();
+  virtual ~ctkDICOMEchoWorker();
 
   /// Execute worker. This method is run by the QThreadPool and is thread safe
   void run() override;
@@ -59,25 +58,25 @@ public:
   ///@}
 
   ///@{
-  /// Querier.
+  /// Echo.
   /// These methods are not thread safe
-  QSharedPointer<ctkDICOMQuery> querierShared() const;
-  Q_INVOKABLE ctkDICOMQuery* querier() const;
+  QSharedPointer<ctkDICOMEcho> echoShared() const;
+  Q_INVOKABLE ctkDICOMEcho* echo() const;
   ///@}
 
 protected:
-  QScopedPointer<ctkDICOMQueryWorkerPrivate> d_ptr;
+  QScopedPointer<ctkDICOMEchoWorkerPrivate> d_ptr;
 
   /// Constructor allowing derived class to specify a specialized pimpl.
   ///
   /// \note You are responsible to call init() in the constructor of
   /// derived class. Doing so ensures the derived class is fully
   /// instantiated in case virtual method are called within init() itself.
-  ctkDICOMQueryWorker(ctkDICOMQueryWorkerPrivate* pimpl);
+  ctkDICOMEchoWorker(ctkDICOMEchoWorkerPrivate* pimpl);
 
 private:
-  Q_DECLARE_PRIVATE(ctkDICOMQueryWorker);
-  Q_DISABLE_COPY(ctkDICOMQueryWorker);
+  Q_DECLARE_PRIVATE(ctkDICOMEchoWorker);
+  Q_DISABLE_COPY(ctkDICOMEchoWorker);
 };
 
 #endif

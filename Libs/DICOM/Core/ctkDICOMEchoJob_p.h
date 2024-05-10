@@ -21,52 +21,31 @@
 
 =========================================================================*/
 
-#ifndef __ctkDICOMQueryJobPrivate_h
-#define __ctkDICOMQueryJobPrivate_h
+#ifndef __ctkDICOMEchoJobPrivate_h
+#define __ctkDICOMEchoJobPrivate_h
 
 // Qt includes
-#include <QList>
-#include <QMap>
+#include <QObject>
 #include <QSharedPointer>
-#include <QString>
-class QVariant;
-
-// ctkCore includes
-#include <ctkJobScheduler_p.h>
-class ctkAbstractJob;
-class ctkAbstractWorker;
-class ctkDICOMDatabase;
-class ctkDICOMServer;
 
 // ctkDICOMCore includes
-#include "ctkDICOMScheduler.h"
+#include "ctkDICOMEchoJob.h"
+#include "ctkDICOMServer.h"
 
 //------------------------------------------------------------------------------
-struct ThumbnailUID
-{
-  QString studyInstanceUID;
-  QString seriesInstanceUID;
-  QString SOPInstanceUID;
-} ;
-
-//------------------------------------------------------------------------------
-class ctkDICOMSchedulerPrivate : public ctkJobSchedulerPrivate
+class ctkDICOMEchoJobPrivate : public QObject
 {
   Q_OBJECT
-  Q_DECLARE_PUBLIC(ctkDICOMScheduler);
+  Q_DECLARE_PUBLIC(ctkDICOMEchoJob)
+
+protected:
+  ctkDICOMEchoJob* const q_ptr;
 
 public:
-  ctkDICOMSchedulerPrivate(ctkDICOMScheduler& obj);
-  virtual ~ctkDICOMSchedulerPrivate();
+  ctkDICOMEchoJobPrivate(ctkDICOMEchoJob* object);
+  virtual ~ctkDICOMEchoJobPrivate();
 
-  bool isServerAllowed(ctkDICOMServer* server, const QStringList& allowedSeversForPatient);
-  ctkDICOMServer* getServerFromProxyServersByConnectionName(const QString&);
-
-  QSharedPointer<ctkDICOMDatabase> DicomDatabase;
-  QList<QSharedPointer<ctkDICOMServer>> Servers;
-  QMap<QString, QVariant> Filters;
-
-  int MaximumPatientsQuery{25};
+  ctkDICOMServer* Server;
 };
 
 #endif
